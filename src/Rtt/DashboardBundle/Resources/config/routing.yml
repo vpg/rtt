@@ -14,3 +14,8 @@ metrics_flop:
 metrics_search:
     path:     /metrics/search
     defaults: { _controller:DashboardBundle:Metrics:search}
+
+
+metrics_insert:
+    path:     /event/insert
+    defaults: { _controller:DashboardBundle:Metrics:insertRecord}
