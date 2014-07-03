@@ -8,6 +8,8 @@ Off-site RaealTimeTracker project
 	vagrant ssh
 		sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
 	vagrant reload
+
+	  chmod -R 777 var/cache/ var/logs/
 	
 ###Objectifs Fonctionnel
  * Mettre en place des indicateurs de divers natures, relatif à l’utilisation des UIs (sites et back office) et à l'exécution des batchs
