@@ -1,18 +1,41 @@
-Symfony Standard Edition
-========================
+#rtt
+Off-site RaealTimeTracker project
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+###Objectifs Fonctionnel
+ * Mettre en place des indicateurs de divers natures, relatif à l’utilisation des UIs (sites et back office) et à l'exécution des batchs
+ * Créer une interface de restitution de ces indicateurs (avec filtres)
+	
+###Objectif techniques
+ * Ne pas impacter le chargement des pages
+ * Temps Réel
+ * Fournir une API de tracking 
+ * Mise en place de métriques sans effort
+ * Récupération de métriques
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+###Archi Technique
+ * NodeJS
+ * MongoDB
+ * Symfony 2
+ * BootstrapCSS http://getbootstrap.com/
 
-1) Installing the Standard Edition
-----------------------------------
-
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+###DB
+Structure d’un doc “event”
+ * type [ visit, click, scroll, …]
+ * element_x :
+  * code
+  * application
+  * country
+  * protocole  [http, https]
+  * domain
+  * path
+  * params
+  * target
+ * value
+ * occured_on
+ * client_x:
+ * id
+ * ip 
+ * user_agent
 
 ### Use Composer (*recommended*)
 
