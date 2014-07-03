@@ -39,11 +39,11 @@
             socket.emit('track:out', e);
         }
         socket.on('connect', function () {
-            socket.on('in:'+ window.location.pathname, function (x) {
+            socket.on('in:'+ 'demo', function (x) {
                 var view_count = parseInt($('#view_count').html(),10)+1;
                 $('#view_count').html(view_count);
             });
-            socket.on('out:'+ window.location.pathname, function (x) {
+            socket.on('out:'+ 'demo', function (x) {
                 var view_count = parseInt($('#view_count').html(),10)-1;
                 $('#view_count').html(view_count);
             });
