@@ -19,7 +19,7 @@ var schema= new mongoose.Schema(
                     id:             String,
                     user_agent:     String,
                     ip:             String,
-                  }
+                  },
       value:    String
     },
     { collection: name }

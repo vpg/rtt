@@ -3,6 +3,7 @@
     "description": "RealTime Tracking",
     "version": "0.0.1",
     "dependencies": {
+        "express":     "latest",
         "body-parser": "latest",
         "mongoose":    "latest",
         "winston":     "latest",
@@ -10,9 +11,6 @@
     },
     "devdependencies": {
         "mocha": "latest"
-    },
-    "scripts": {
-        "test": ""
     },
     "author": "JB jeromebourgeais.pro@gmail.com"
 }
