@@ -1,3 +1,16 @@
 dashboard_homepage:
     path:     /hello
     defaults: { _controller: DashboardBundle:Default:index }
+
+metrics_overview:
+    path:     /metrics/
+    defaults: { _controller:DashboardBundle:Metrics:overview}
+metrics_top:
+    path:     /metrics/top
+    defaults: { _controller:DashboardBundle:Metrics:top}
+metrics_flop:
+    path:     /metrics/flop
+    defaults: { _controller:DashboardBundle:Metrics:flop}
+metrics_search:
+    path:     /metrics/search
+    defaults: { _controller:DashboardBundle:Metrics:search}
