@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RTT Demo 0.1</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="http://192.168.150.57:8086/socket.io/socket.io.js"></script>        
+    <script type="text/javascript">
+        var socket = io.connect('http://192.168.150.57:8086');
+        var e = { 
+            type: 'visit',
+            element_x:  { 
+                     application:   'front',
+                     country:       'fr_FR',
+                     protocol:      window.location.protocol,
+                     domain:        window.location.host,
+                     path:          window.location.pathname,
+                     params:        window.location.search,
+                     raw:           window.location.href
+                  },
+            client_x:   {
+                    id:             'JB',
+                    user_agent:     navigator.userAgent,
+                  },
+            value:    1
+            };
+        socket.emit('track:in', e);
+        window.onbeforeunload = function () {
+            socket.emit('track:out', e);
+        }
+        socket.on('connect', function () {
+            socket.on('in:'+ window.location.href, function (x) {
+                var view_count = parseInt($('#view_count').html(),10)+1;
+                $('#view_count').html(view_count);
+            });
+            socket.on('out:'+ window.location.href, function (x) {
+                var view_count = parseInt($('#view_count').html(),10)-1;
+                $('#view_count').html(view_count);
+            });
+        });
+    </script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">RTT Demo
+                <small>A simple client page</small>
+        </h3>
+      </div>
+      <div class="jumbotron">
+        <h1>WE WANT RTT !!</h1>
+        <p class="lead">We <span class="glyphicon glyphicon-heart"></span> IT !</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Get RTT NOW !</a></p>
+        <span class="badge" id="view_count">0</span>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Real</h4>
+          <p>Need womething <button type="button" class="btn btn-primary">Real</button> ?</p>
+          <h4>Tracker</h4>
+          <p><button type="button" class="btn btn-danger">Track</button> me, i'm famous !</p>
+        </div>
+        <div class="col-lg-6">
+          <h4>Time</h4>
+          <p>Click here to get more <button type="button" class="btn btn-info">Time</button></p>
+
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&copy; Company 2014</p>
+      </div>
+
+    </div>
+  </body>
+</html>
