@@ -1,0 +1,16 @@
+{
+    "name": "RTT",
+    "description": "RealTime Tracking",
+    "version": "0.0.1",
+    "dependencies": {
+        "express":     "latest",
+        "body-parser": "latest",
+        "mongoose":    "latest",
+        "winston":     "latest",
+        "socket.io":   "latest"
+    },
+    "devdependencies": {
+        "mocha": "latest"
+    },
+    "author": "JB jeromebourgeais.pro@gmail.com"
+}
