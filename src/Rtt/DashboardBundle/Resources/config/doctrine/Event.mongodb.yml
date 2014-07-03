@@ -1,0 +1,10 @@
+Rtt\DashboardBundle\Document\Event:
+    fields:
+        id:
+            id:  true
+        type:
+            type: string
+        value:
+            type: string
+        occured_on:
+            type: timestamp

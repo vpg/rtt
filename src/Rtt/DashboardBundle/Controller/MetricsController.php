@@ -3,6 +3,8 @@
 namespace Rtt\DashboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Rtt\DashboardBundle\Document\Event;
+use Symfony\Component\HttpFoundation\Response;
 
 class MetricsController extends Controller
 {
@@ -21,4 +23,17 @@ class MetricsController extends Controller
     public function searchAction() {
         return $this->render('DashboardBundle:Metrics:metrics.html.twig');
     }
+
+    public function insertRecordAction() {
+        $event = new Event();
+        $event->setType(Event::TYPE_CLICK);
+        //$event->setOccuredOn(new \DateTime());
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($event);
+        $dm->flush();
+
+        return new Response('Created product id '.$event->getId());
+    }
+
 }
