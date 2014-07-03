@@ -1,6 +1,14 @@
 #rtt
 Off-site RaealTimeTracker project
 
+###USE
+	git clone git@github.com:vpg/rtt.git
+	cd rtt
+	vagrant up
+	vagrant ssh
+		sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+	vagrant reload
+	
 ###Objectifs Fonctionnel
  * Mettre en place des indicateurs de divers natures, relatif à l’utilisation des UIs (sites et back office) et à l'exécution des batchs
  * Créer une interface de restitution de ces indicateurs (avec filtres)
