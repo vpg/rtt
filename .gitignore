@@ -1,2 +1,10 @@
 var/logs/*
 var/cache/*
+
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+
+# Assets and user uploads
+web/bundles/
+web/uploads/
+
