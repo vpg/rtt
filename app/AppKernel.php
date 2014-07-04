@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Rtt\DashboardBundle\DashboardBundle(),
             new Rtt\EventBundle\EventBundle(),
             new Rtt\ApiBundle\ApiBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
