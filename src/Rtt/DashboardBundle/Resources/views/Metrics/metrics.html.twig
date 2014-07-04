@@ -80,8 +80,22 @@
                     vcount = vcount + event_x.value;
                     var y = vcount;
                     var x = (new Date()).getTime(); // current time
-                    console.log(chart);
-                    chart.series[0].addPoint({x : x, y : vcount}, false);
+
+                    var os = event_x.user_agent_x.os;
+                    var idSerie = 0;
+                    switch(os) {
+                     case 'Linux':
+                        idSerie = 0;
+                        break;
+                     case 'Windows':
+                        idSerie = 1;
+                        break;
+                     default:
+                        idSerie = 4;
+                        break;
+                    }
+
+                    chart.series[idSerie].addPoint({x : x, y : vcount}, false);
                     chart.redraw();
                 });
             });
