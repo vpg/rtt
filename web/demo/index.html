@@ -17,13 +17,24 @@
     <script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
     <script src="/demo/rtt.js"></script>        
     <script type="text/javascript">
-        rtt.view(); 
-        window.onbeforeunload = function () {
-            rtt.leave();
-        }
-        rtt.monitor_visit( rtt.build_page_code(), function (event_x){
-            var view_count = parseInt($('#view_count').html(),10)+event_x.value;
-            $('#view_count').html(view_count);
+        $( document ).ready(function() {
+            // Tracking page view
+            rtt.view(); 
+            // Tracking leaving page
+            window.onbeforeunload = function (){
+                rtt.leave();
+            }
+            // Tracking clicks
+            $('#get_rtt_btn').bind('click', function (){
+                alert( 'd');
+                rtt.click( $(this).attr('id'));
+            });
+            // monitor view
+            rtt.monitor( rtt.build_page_code(), function (event_x){
+                var view_count = parseInt($('#view_count').html(),10)+event_x.value;
+                $('#view_count').html(view_count);
+                console.log('Monit %s', event_x.value);
+            });
         });
     </script>
   </head>
@@ -44,7 +55,7 @@
       <div class="jumbotron">
         <h1>WE WANT RTT !!</h1>
         <p class="lead">We <span class="glyphicon glyphicon-heart"></span> IT !</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get RTT NOW !</a></p>
+        <p><a id="get_rtt_btn" class="btn btn-lg btn-success" href="#" role="button">Get RTT NOW !</a></p>
         <span class="badge" id="view_count">0</span>
       </div>
 
