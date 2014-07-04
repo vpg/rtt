@@ -14,38 +14,26 @@
     <link href="jumbotron-narrow.css" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="http://192.168.150.57:8086/socket.io/socket.io.js"></script>        
+    <script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
+    <script src="/demo/rtt.js"></script>        
     <script type="text/javascript">
-        var socket = io.connect('http://192.168.150.57:8086');
-        var e = { 
-            type: 'visit',
-            element_x:  { 
-                     application:   'front',
-                     country:       'fr_FR',
-                     protocol:      window.location.protocol,
-                     domain:        window.location.host,
-                     path:          window.location.pathname,
-                     params:        window.location.search,
-                     raw:           'demo'
-                  },
-            client_x:   {
-                    id:             'JB',
-                    user_agent:     navigator.userAgent,
-                  },
-            value:    1
-            };
-        socket.emit('track:in', e);
-        window.onbeforeunload = function () {
-            socket.emit('track:out', e);
-        }
-        socket.on('connect', function () {
-            socket.on('in:'+ 'demo', function (x) {
-                var view_count = parseInt($('#view_count').html(),10)+1;
-                $('#view_count').html(view_count);
+        $( document ).ready(function() {
+            // Tracking page view
+            rtt.view(); 
+            // Tracking leaving page
+            window.onbeforeunload = function (){
+                rtt.leave();
+            }
+            // Tracking clicks
+            $('#get_rtt_btn').bind('click', function (){
+                alert( 'd');
+                rtt.click( $(this).attr('id'));
             });
-            socket.on('out:'+ 'demo', function (x) {
-                var view_count = parseInt($('#view_count').html(),10)-1;
+            // monitor view
+            rtt.monitor( rtt.build_view_code(), function (event_x){
+                var view_count = parseInt($('#view_count').html(),10)+event_x.value;
                 $('#view_count').html(view_count);
+                console.log('Monit %s', event_x.value);
             });
         });
     </script>
@@ -67,7 +55,7 @@
       <div class="jumbotron">
         <h1>WE WANT RTT !!</h1>
         <p class="lead">We <span class="glyphicon glyphicon-heart"></span> IT !</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Get RTT NOW !</a></p>
+        <p><a id="get_rtt_btn" class="btn btn-lg btn-success" href="#" role="button">Get RTT NOW !</a></p>
         <span class="badge" id="view_count">0</span>
       </div>
 
