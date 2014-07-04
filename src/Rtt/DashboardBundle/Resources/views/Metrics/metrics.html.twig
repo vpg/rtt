@@ -72,13 +72,10 @@
                     ]
                 });
 
-                var vcount = 0;
+                var vcount = [0, 0, 0, 0];
 
                 rtt.monitor( $('#offer_id').val(), function (event_x){
                     console.log('Monit %s', event_x.value);
-                    vcount = vcount + event_x.value;
-                    var y = vcount;
-                    var x = (new Date()).getTime(); // current time
 
                     var os = event_x.client_x.user_agent_x.os;
                     var idSerie = 0;
@@ -93,11 +90,15 @@
                         idSerie = 2;
                         break;
                      default:
-                        idSerie = 4;
+                        idSerie = 3;
                         break;
                     }
 
-                    chart.series[idSerie].addPoint({x : x, y : vcount}, false);
+                    vcount[idSerie] = parseInt(vcount[idSerie], 10) + parseInt(event_x.value, 10);
+                    var y = vcount[idSerie];
+                    var x = (new Date()).getTime(); // current time
+
+                    chart.series[idSerie].addPoint({x : x, y : vcount[idSerie]}, false);
                     chart.redraw();
                 });
             });
