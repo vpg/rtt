@@ -5,11 +5,13 @@
         <tr>
             <th>Offer</th>
             <th>Nb Visits</th>
+            <th>Event Code</th>
         </tr>
         {% for offer in offers %}
         <tr>
             <td>{{ offer.code }}</td>
             <td>{{ offer.value }}</td>
+            <td>{{ offer.event_code }}</td>
         </tr>
         {% endfor %}
     </table>

@@ -118,12 +118,14 @@ class MetricsController extends Controller
         {
           $offers[$offerCode]["code"] = $offerCode;
           $offers[$offerCode]["value"]++;
+          $offers[$offerCode]["event_code"] = $event->getElementX()->getCode();
         }
         else
         {
           $offers[$offerCode] = [];
           $offers[$offerCode]["code"] = $offerCode;
           $offers[$offerCode]["value"] = 1;
+          $offers[$offerCode]["event_code"] = $event->getElementX()->getCode();
         }
       }
     }
