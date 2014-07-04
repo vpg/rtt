@@ -4,7 +4,7 @@
  */
 
 var Rtt = function(){
-    this.rtt_server= 'http://192.168.20.20:8086';
+    this.rtt_server= 'http://192.168.150.57:8086';
     this.socket=     io.connect( this.rtt_server);
     this.monitors= [];
     this.app= null;
