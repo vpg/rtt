@@ -7,7 +7,8 @@
         "body-parser": "latest",
         "mongoose":    "latest",
         "winston":     "latest",
-        "socket.io":   "latest"
+        "socket.io":   "latest",
+        "uas-parser":  "latest"
     },
     "devdependencies": {
         "mocha": "latest"

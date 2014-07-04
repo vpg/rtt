@@ -14,7 +14,6 @@ var app = _express();
 app.use(_express.static(__dirname + '/www'));
 app.use(_bodyParser());
 
-
 app.get('/', function(req, res) {
     res.setHeader('Content-Type', 'text/plain');
     res.end('WE all want RTT !');
@@ -27,10 +26,11 @@ var io=   require('socket.io')(server);
 io.on('connection', function (socket) {
     console.log('One more connection');
     socket.on('track:in', function (x) {
-        console.log('track:in from %s by %s ', x.element_x.code, x.client_x.id );
-        x.client_x.ip = socket.handshake.address.address;
+        console.log('track:in %s from %s by %s ', x.type,  x.element_x.code, x.client_x.user_agent_x.raw );
+            console.log(x.client_x);
+        //x.client_x.ip = socket.handshake.address.address;
         evt_dd.register( x.type, x.element_x, x.client_x, x.value, function (evt, err){ 
-            //console.log(evt);
+            //console.log(x);
         });
         io.sockets.emit('in:'+x.element_x.code, x);
     });
@@ -38,7 +38,14 @@ io.on('connection', function (socket) {
         console.log('track:out from %s ', x.element_x.code );
         io.sockets.emit('out:'+x.element_x.code, x);
     });
-
+    //socket.on('rtt_ping', function ( _x){
+    //   console.log('Fowarding ping from %s', _x.element_x.code);
+    //   socket.broadcast.emit('rtt_ping:'+_x.element_x.code,  { element_x : { code : _x.element_x.code}, value : 1});
+    //});
+    //socket.on('rtt_pong', function ( _x){
+    //   console.log('Forwarding pong from %s', _x.element_x.code);
+    //   socket.emit('rtt_pong:'+_x.element_x.code,  { element_x : { code : _x.element_x.code}, value : 1});
+    //});
     socket.on('disconnect', function () {
         l.log("Socket disconnected");
     });
