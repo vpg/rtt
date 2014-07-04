@@ -13,5 +13,8 @@ bin/
 web/bundles/
 web/uploads/
 var/
+vendor/
 UPGRADE*
 phpunit.xml.dist
+LICENSE
+composer.lock
