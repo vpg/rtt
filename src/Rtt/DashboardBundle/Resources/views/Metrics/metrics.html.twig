@@ -65,10 +65,10 @@
                         enabled: false
                     },
                     series: [
-                        { name: 'Linux',    color: '#4169E1', data: [] },
-                        { name: 'Windows',  color: '#FF0000', data: [] },
-                        { name: 'OS X',     color: '#008000', data: [] },
-                        { name: 'Other',    color: '#000000', data: [] }
+                        { name: 'Linux',     data: [] },
+                        { name: 'Windows',   data: [] },
+                        { name: 'OS X',      data: [] },
+                        { name: 'Other',     data: [] }
                     ]
                 });
 
@@ -80,7 +80,7 @@
                     var y = vcount;
                     var x = (new Date()).getTime(); // current time
 
-                    var os = event_x.user_agent_x.os;
+                    var os = event_x.client_x.user_agent_x.os;
                     var idSerie = 0;
                     switch(os) {
                      case 'Linux':
