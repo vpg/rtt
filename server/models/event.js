@@ -4,7 +4,7 @@
 
 var mongoose=   require('mongoose');
 var name= 'event';
-var schema= new mongoose.Schema(
+var schema_x= new mongoose.Schema(
     { //_id:  { type:  mongoose.Schema.ObjectId},
       type:       { type: String,  required: true},
       element_x:  { 
@@ -20,15 +20,21 @@ var schema= new mongoose.Schema(
       occured_on: { type: Date, default: Date.now },
       client_x:   {
                     id:             String,
-                    user_agent:     String,
                     ip:             String,
-                  },
+                    user_agent_x:   {
+                      raw:    String,
+                      client: String,
+                      name:   String,
+                      os:     String,
+                      device: String
+                     },
+      },
       value:    String
     },
     { collection: name }
 );
 
-module.exports = mongoose.model( name, schema);
+module.exports = mongoose.model( name, schema_x);
 
 /*
 

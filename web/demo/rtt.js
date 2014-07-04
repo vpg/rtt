@@ -19,27 +19,36 @@ Rtt.prototype.build_click_code= function( _dom_element_id){
  return this.build_view_code() + ':' + _dom_element_id;
 }
 
-/**
- * rtt.view sends a visit:in event type
- * Use case : a new visitor loads the current page
- */
-Rtt.prototype.view= function (){
+Rtt.prototype.build_event_x= function( _type, _code, _value){
     var event_x = { 
-        type: 'visit:in',
+        type: _type,
         element_x:  { 
                  application:   this.app,
                  protocol:      window.location.protocol,
                  domain:        window.location.host,
                  path:          window.location.pathname,
                  params:        window.location.search,
-                 code:          this.build_page_code()
+                 code:          _code
               },
         client_x:   {
                 id:             this.client_id,
-                user_agent:     navigator.userAgent,
-              },
-        value: 1
+                user_agent_x:   {
+                    raw: navigator.userAgent,
+                },
+        },
+        value: _value
         };
+        console.log( event_x);
+    return event_x;
+}
+
+
+/**
+ * rtt.view sends a visit:in event type
+ * Use case : a new visitor loads the current page
+ */
+Rtt.prototype.view= function (){
+    var event_x = this.build_event_x( 'visit:in', this.build_view_code(), 1);
     this.socket.emit('track:in', event_x);
     /* xxx
     window.onbeforeunload = function (e){
@@ -53,42 +62,12 @@ Rtt.prototype.view= function (){
  * Use case : a new visitor leaves the current page
  */
 Rtt.prototype.leave= function (){
-    var event_x = { 
-        type: 'visit:in',
-        element_x:  { 
-                 application:   this.app,
-                 protocol:      window.location.protocol,
-                 domain:        window.location.host,
-                 path:          window.location.pathname,
-                 params:        window.location.search,
-                 code:          this.build_page_code()
-              },
-        client_x:   {
-                id:             this.client_id,
-                user_agent:     navigator.userAgent,
-              },
-        value: -1
-        };
-        this.socket.emit('track:out', event_x);
+    var event_x = this.build_event_x( 'visit:in', this.build_view_code(), -1);
+    this.socket.emit('track:out', event_x);
 }
 
 Rtt.prototype.click= function ( _dom_element_id){
-    var event_x = { 
-        type: 'click',
-        element_x:  { 
-                 application:   this.app,
-                 protocol:      window.location.protocol,
-                 domain:        window.location.host,
-                 path:          window.location.pathname,
-                 params:        window.location.search,
-                 code:          this.build_click_code( _dom_element_id)
-              },
-        client_x:   {
-                id:             this.client_id,
-                user_agent:     navigator.userAgent,
-              },
-        value: 1
-        };
+    var event_x = this.build_event_x( 'click', this.build_click_code( _dom_element_id), 1);
     this.socket.emit('track:in', event_x);
 }
 
