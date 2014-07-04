@@ -29,10 +29,9 @@ io.on('connection', function (socket) {
         console.log('track:in %s from %s by %s ', x.type,  x.element_x.code, x.client_x.user_agent_x.raw );
             console.log(x.client_x);
         //x.client_x.ip = socket.handshake.address.address;
-        evt_dd.register( x.type, x.element_x, x.client_x, x.value, function (evt, err){ 
-            //console.log(x);
+        evt_dd.register( x.type, x.element_x, x.client_x, x.value, function (_event_x, err){ 
+            io.sockets.emit('in:'+x.element_x.code, _event_x);
         });
-        io.sockets.emit('in:'+x.element_x.code, x);
     });
     socket.on('track:out', function (x) {
         console.log('track:out from %s ', x.element_x.code );

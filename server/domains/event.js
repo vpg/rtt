@@ -27,7 +27,7 @@ event_dd.prototype.register = function ( _type, _element_x, _client_x, _value, c
                     raw:    _client_x.user_agent_x.raw,
                     client:   ua_x.type,
                     name:   ua_x.uaName,
-                    os:     ua_x.osName,
+                    os:     ua_x.osFamily,
                     device: ua_x.deviceType
                 },
             },
