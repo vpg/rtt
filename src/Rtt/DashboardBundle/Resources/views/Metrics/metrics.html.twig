@@ -3,7 +3,7 @@
 {% block head %}
     {{ parent() }}
 
-
+    <script src="{{ asset('demo/rtt.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             $(document).ready(function() {
@@ -13,10 +13,10 @@
                     }
                 });
 
-                var chart;
-                $('#chart').highcharts({
+                var chart = new HightCharts.Chart({
                     chart: {
                         type: 'spline',
+                        renderTo: 'chart',
                         animation: Highcharts.svg, // don't animate in old IE
                         marginRight: 10,
                         events: {
@@ -80,6 +80,14 @@
                                  })()
                              }]
                 });
+            });
+
+
+            rtt.monitor( $('offer_id').value, function (event_x){
+                console.log('Monit %s', event_x.value);
+                var y = parseInt($('#view_count').html(),10)+event_x.value;
+                var x = (new Date()).getTime(), // current time
+                chart..series[0].series.addPoint([x, y], true, true);
             });
 
         });
