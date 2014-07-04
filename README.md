@@ -30,14 +30,17 @@ track click
 Monitoring tracking
 	
 	<script type="text/javascript">
-		rtt.monitor_view( rtt.build_page_code(), function (event_x){
+		/* Subcribe to an event
+		 * rtt.monitor_view( _event_code, _callback( _event_x))
+		 * on each new event relative to the _event_code, call a callback function _callback w/ the given event hashmap _event_x
+		*/
+		rtt.monitor_view( rtt.build_view_code(), function (event_x){
+			// Increment a counter
 			var view_count = parseInt($('#view_count').html(),10)+event_x.value;
 			$('#view_count').html(view_count);
 		});
 	</script>
-        
-            
-    </script>
+
 
 ### How to Maintain
 Install rtt server
