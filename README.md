@@ -1,8 +1,43 @@
 #rtt
 Off-site RaealTimeTracker project
 
-### How to USE
+### How to USE (client side)
+Get socket.io from rtt server
 
+	<script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
+
+Include RTT client class
+	
+	<script src="rtt.js"></script>        
+
+track page view
+	
+	<script type="text/javascript">
+		rtt.view();
+		window.onbeforeunload = function () {
+			rtt.leave();
+		}
+	</script>
+    
+track click
+	
+	<script type="text/javascript">
+		$('#get_rtt_btn').bind('click', function () {
+			rtt.click( $(this).attr('id'));
+		});
+	</script>
+    
+Monitoring tracking
+	
+	<script type="text/javascript">
+		rtt.monitor_view( rtt.build_page_code(), function (event_x){
+			var view_count = parseInt($('#view_count').html(),10)+event_x.value;
+			$('#view_count').html(view_count);
+		});
+	</script>
+        
+            
+    </script>
 
 ### How to Maintain
 Install rtt server
