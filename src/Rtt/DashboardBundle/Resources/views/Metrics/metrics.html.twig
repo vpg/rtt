@@ -64,13 +64,12 @@
                     exporting: {
                         enabled: false
                     },
-                    series: [{
-                                 name: 'Random data',
-                                 data: (function() {
-
-                                     return [];
-                                 })()
-                             }]
+                    series: [
+                        { name: 'Linux', data: [] },
+                        { name: 'Windows', data: [] },
+                        { name: 'Apple', data: [] },
+                        { name: 'Other', data: [] }
+                    ]
                 });
 
                 var vcount = 0;
