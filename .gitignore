@@ -1,10 +1,17 @@
-var/logs/*
-var/cache/*
-
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 
-# Assets and user uploads
+# Vagrant
+.vagrant
+
+# NodeJS
+server/logs
+server/node_modules
+
+# Symfony
+bin/
 web/bundles/
 web/uploads/
-
+var/
+UPGRADE*
+phpunit.xml.dist
