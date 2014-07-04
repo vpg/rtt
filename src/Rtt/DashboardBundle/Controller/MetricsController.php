@@ -14,13 +14,28 @@ class MetricsController extends Controller
         return $this->render('DashboardBundle:Metrics:metrics.html.twig');
     }
 
-    public function topAction() {
-        return $this->render('DashboardBundle:Metrics:metrics.html.twig');
+    public function topVisitsAction() {
+        $offers = $this->getOffersVisits();
+        usort($offers, function($a, $b)
+        {
+          return $b['value'] - $a['value'];
+        });
+        return $this->render('DashboardBundle:Metrics:topVisits.html.twig',
+          array('offers'  => $offers)
+        );
     }
 
-    public function flopAction() {
-        return $this->render('DashboardBundle:Metrics:metrics.html.twig');
+    public function flopVisitsAction() {
+        $offers = $this->getOffersVisits();
+        usort($offers, function($a, $b)
+        {
+            return $a['value'] - $b['value'];
+        });
+        return $this->render('DashboardBundle:Metrics:topVisits.html.twig',
+            array('offers'  => $offers)
+        );
     }
+
 
     public function searchAction() {
         return $this->render('DashboardBundle:Metrics:metrics.html.twig');
@@ -64,5 +79,57 @@ class MetricsController extends Controller
 
         return new Response('Created event id '.$event->getId());
     }
+  /**
+   * @return array
+   */
+  public function getOffersVisits()
+  {
+    $events = $this->get('doctrine_mongodb')
+      ->getManager()
+      ->getRepository('EventBundle:Event')
+      ->findByType('visit:in');
+
+    // Getting events of the day
+    $visitsOfDay = [];
+    $now = new \DateTime();
+    foreach ($events as $event)
+    {
+      $diff = $now->diff($event->getOccuredOn());
+      if (
+        $diff->y == 0 &&
+        $diff->m == 0 &&
+        $diff->d == 0
+      )
+      {
+        $visitsOfDay[] = $event;
+      }
+    }
+
+    $offers = [];
+    $nbTotalVisits = 0;
+    foreach ($visitsOfDay as $event)
+    {
+      $path = $event->getElementX()->getPath();
+      if (strpos($path, 'fiche-produit/details') !== false)
+      {
+        $pathX = explode('/', $path);
+        $offerCode = $pathX[3];
+        if (isset($offers[$offerCode]))
+        {
+          $offers[$offerCode]["code"] = $offerCode;
+          $offers[$offerCode]["value"]++;
+          $offers[$offerCode]["event_code"] = $event->getElementX()->getCode();
+        }
+        else
+        {
+          $offers[$offerCode] = [];
+          $offers[$offerCode]["code"] = $offerCode;
+          $offers[$offerCode]["value"] = 1;
+          $offers[$offerCode]["event_code"] = $event->getElementX()->getCode();
+        }
+      }
+    }
+    return $offers;
+  }
 
 }
