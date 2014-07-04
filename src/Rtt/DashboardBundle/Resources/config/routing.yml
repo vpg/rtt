@@ -15,6 +15,10 @@ metrics_search:
     path:     /metrics/search
     defaults: { _controller:DashboardBundle:Metrics:search}
 
+metrics_list_by_type:
+    path:     /metrics/listByType
+    defaults: { _controller:DashboardBundle:Metrics:listByType}
+
 
 metrics_insert:
     path:     /event/insert

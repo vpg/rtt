@@ -26,6 +26,15 @@ class MetricsController extends Controller
         return $this->render('DashboardBundle:Metrics:metrics.html.twig');
     }
 
+    public function listByTypeAction($type=null) {
+        $events = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('EventBundle:Event')
+            ->findAll();
+
+        return $this->render('DashboardBundle:Metrics:list.html.twig', array('events' => $events));
+    }
+
     public function insertRecordAction() {
         $event = new Event();
         $event->setType(Event::TYPE_CLICK);
