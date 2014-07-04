@@ -1,0 +1,20 @@
+Rtt\EventBundle\Document\Element:
+    collection: element_x
+    type: embeddedDocument
+    fields:
+        code:
+            type: string
+        application:
+            type: string
+        country:
+            type: string
+        protocole:
+            type: string
+        domain:
+            type: string
+        path:
+            type: string
+        params:
+            type: string
+        target:
+            type: string

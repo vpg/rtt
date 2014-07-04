@@ -1,0 +1,22 @@
+{% extends "DashboardBundle::layout.html.twig" %}
+
+{% block content %}
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th>Element</th>
+        </tr>
+        {% for event in events %}
+        <tr>
+            <td>{{ event.id }}</td>
+            <td>{{ event.type }}</td>
+            <td>{{ event.value }}</td>
+            <td>{{ event.occuredOn|date("Y-m-d h:i:s") }}</td>
+            <td>{{ event.elementX.application }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

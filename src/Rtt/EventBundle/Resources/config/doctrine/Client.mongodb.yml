@@ -1,0 +1,10 @@
+Rtt\EventBundle\Document\Client:
+    collection: client_x
+    type: embeddedDocument
+    fields:
+        id:
+            type: string
+        ip:
+            type: string
+        user_agent:
+            type: string

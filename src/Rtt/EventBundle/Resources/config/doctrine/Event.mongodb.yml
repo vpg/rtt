@@ -1,0 +1,17 @@
+Rtt\EventBundle\Document\Event:
+    collection: event
+    type: document
+    fields:
+        id:
+            id:  true
+        type:
+            type: string
+        value:
+            type: string
+        occured_on:
+            type: date
+    embedOne:
+        element_x:
+            targetDocument: Element
+        client_x:
+            targetDocument: Client
