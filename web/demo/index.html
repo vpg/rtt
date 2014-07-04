@@ -30,7 +30,7 @@
                 rtt.click( $(this).attr('id'));
             });
             // monitor view
-            rtt.monitor( rtt.build_page_code(), function (event_x){
+            rtt.monitor( rtt.build_view_code(), function (event_x){
                 var view_count = parseInt($('#view_count').html(),10)+event_x.value;
                 $('#view_count').html(view_count);
                 console.log('Monit %s', event_x.value);

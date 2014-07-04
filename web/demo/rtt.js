@@ -12,11 +12,11 @@ var Rtt = function(){
 }
 
 
-Rtt.prototype.build_page_code= function(){
+Rtt.prototype.build_view_code= function(){
  return window.location.href;
 }
 Rtt.prototype.build_click_code= function( _dom_element_id){
- return this.build_page_code() + ':' + _dom_element_id;
+ return this.build_view_code() + ':' + _dom_element_id;
 }
 
 /**
