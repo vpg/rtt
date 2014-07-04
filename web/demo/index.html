@@ -14,39 +14,16 @@
     <link href="jumbotron-narrow.css" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="http://192.168.150.57:8086/socket.io/socket.io.js"></script>        
+    <script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
+    <script src="/demo/rtt.js"></script>        
     <script type="text/javascript">
-        var socket = io.connect('http://192.168.150.57:8086');
-        var e = { 
-            type: 'visit',
-            element_x:  { 
-                     application:   'front',
-                     country:       'fr_FR',
-                     protocol:      window.location.protocol,
-                     domain:        window.location.host,
-                     path:          window.location.pathname,
-                     params:        window.location.search,
-                     raw:           'demo'
-                  },
-            client_x:   {
-                    id:             'JB',
-                    user_agent:     navigator.userAgent,
-                  },
-            value:    1
-            };
-        socket.emit('track:in', e);
+        rtt.view(); 
         window.onbeforeunload = function () {
-            socket.emit('track:out', e);
+            rtt.leave();
         }
-        socket.on('connect', function () {
-            socket.on('in:'+ 'demo', function (x) {
-                var view_count = parseInt($('#view_count').html(),10)+1;
-                $('#view_count').html(view_count);
-            });
-            socket.on('out:'+ 'demo', function (x) {
-                var view_count = parseInt($('#view_count').html(),10)-1;
-                $('#view_count').html(view_count);
-            });
+        rtt.monitor_visit( rtt.build_page_code(), function (event_x){
+            var view_count = parseInt($('#view_count').html(),10)+event_x.value;
+            $('#view_count').html(view_count);
         });
     </script>
   </head>
