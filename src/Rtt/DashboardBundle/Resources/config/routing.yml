@@ -10,7 +10,7 @@ metrics_topVisits:
     defaults: { _controller:DashboardBundle:Metrics:topVisits}
 metrics_flop:
     path:     /metrics/flop
-    defaults: { _controller:DashboardBundle:Metrics:flop}
+    defaults: { _controller:DashboardBundle:Metrics:flopVisits}
 metrics_search:
     path:     /metrics/search
     defaults: { _controller:DashboardBundle:Metrics:search}
