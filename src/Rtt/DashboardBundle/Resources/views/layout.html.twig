@@ -66,15 +66,54 @@
       </div>
     </div>
 
+  <style type="text/css">
+      .btn-menu {
+          width: 90%;
+          margin: 5px;
+      }
+  </style>
+
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li {% if currentPath == 'metrics_overview' %} class="active" {% endif %}><a href="{{ path('metrics_overview') }}">Overview</a></li>
-            <li {% if currentPath == 'metrics_topVisits' %} class="active" {% endif %}><a href="{{ path('metrics_topVisits') }}">Top Visits</a></li>
-            <li {% if currentPath == 'metrics_flop' %} class="active" {% endif %}><a href="{{ path('metrics_flop') }}">Flop Visits</a></li>
-            <li {% if currentPath == 'metrics_search' %} class="active" {% endif %}><a href="{{ path('metrics_search') }}">Search</a></li>
-            <li {% if currentPath == 'metrics_list_by_type' %} class="active" {% endif %}><a href="{{ path('metrics_list_by_type') }}">List</a></li>
+            <li {% if currentPath == 'metrics_overview' %} class="active" {% endif %}>
+                <button type="button" class="btn btn-default btn-menu">
+                    <span class="glyphicon glyphicon-refresh">
+                    </span>
+                    <a href="{{ path('metrics_overview') }}">Overview</a>
+                </button>
+            </li>
+            <li {% if currentPath == 'metrics_topVisits' %} class="active" {% endif %}>
+                <button type="button" class="btn btn-default btn-menu">
+                    <span class="glyphicon glyphicon-arrow-up">
+                    </span>
+                    <a href="{{ path('metrics_topVisits') }}">Top Visits</a>
+                </button>
+            </li>
+            <li {% if currentPath == 'metrics_flop' %} class="active" {% endif %}>
+                <button type="button" class="btn btn-default btn-menu">
+                    <span class="glyphicon glyphicon-arrow-down">
+                    </span>
+                    <a href="{{ path('metrics_flop') }}">Flop Visits</a>
+                </button>
+            </li>
+
+            <li {% if currentPath == 'metrics_search' %} class="active" {% endif %}>
+                <button type="button" class="btn btn-default btn-menu">
+                    <span class="glyphicon glyphicon-search">
+                    </span>
+                    <a href="{{ path('metrics_search') }}">Search</a>
+                </button>
+            </li>
+            <li {% if currentPath == 'metrics_list_by_type' %} class="active" {% endif %}>
+                <button type="button" class="btn btn-default btn-menu">
+                    <span class="glyphicon glyphicon-list-alt">
+                    </span>
+                    <a href="{{ path('metrics_list_by_type') }}">List</a>
+                </button>
+            </li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
