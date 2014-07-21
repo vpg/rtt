@@ -9,6 +9,7 @@ var schema_x= new mongoose.Schema(
       type:       { type: String,  required: true},
       element_x:  { 
                      code:          String,
+                     id:          String,
                      application:   String,
                      country:       String,
                      protocol:      String,
