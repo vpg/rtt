@@ -14,10 +14,7 @@ var app = _express();
 app.use(_express.static(__dirname + '/www'));
 app.use(_bodyParser());
 
-app.get('/', function(req, res) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('WE all want RTT !');
-});
+require('./routes/events')(app);
 
 var server= _http.createServer(app);
 var io=   require('socket.io')(server);
