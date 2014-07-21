@@ -1,18 +1,30 @@
 {% extends "DashboardBundle::layout.html.twig" %}
 
 {% block content %}
-    <table class="table table-hover">
-        <tr>
-            <th>Offer</th>
-            <th>Nb Visits</th>
-            <th>Event Code</th>
-        </tr>
-        {% for offer in offers %}
-        <tr>
-            <td>{{ offer.code }}</td>
-            <td>{{ offer.value }}</td>
-            <td>{{ offer.event_code }}</td>
-        </tr>
-        {% endfor %}
+    <table id="tob_table" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Offer</th>
+                <th>Nb Visits</th>
+                <th>Event Code</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for offer in offers %}
+                <tr>
+                    <td>{{ offer.code }}</td>
+                    <td>{{ offer.value }}</td>
+                    <td>{{ offer.event_code }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
     </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#top_table').dataTable();
+        } );
+    </script>
 {% endblock %}

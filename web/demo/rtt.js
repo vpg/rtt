@@ -17,8 +17,13 @@ Rtt.prototype.build_view_code= function(){
  return window.location.href;
 
 }
+
 Rtt.prototype.build_click_code= function( _dom_element_id){
  return this.build_view_code() + ':' + _dom_element_id;
+}
+
+Rtt.prototype.build_event_code= function( _eventName){
+  return this.build_view_code() + ':' + _eventName;
 }
 
 Rtt.prototype.build_event_x= function( _type, _code, _value){
@@ -74,6 +79,17 @@ Rtt.prototype.click= function ( _dom_element_id){
     this.socket.emit('track:in', event_x);
 }
 
+Rtt.prototype.event = function (_eventName) {
+  var event_x = this.build_event_x( _eventName, this.build_event_code(_eventName), 1);
+  this.socket.emit('track:in', event_x);
+}
+
+/**
+ * Used to monitor events tracked
+ *
+ * @param _element_code
+ * @param _callback
+ */
 Rtt.prototype.monitor= function( _element_code, _callback){
    this.monitors.push( { 
     element_code: _element_code,
