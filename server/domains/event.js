@@ -44,6 +44,20 @@ event_dd.prototype.register = function ( _type, _element_x, _client_x, _value, c
     callback(e, null);
 }
 
+/**
+ * fetches all the click events in the salesroom according to the given sale number
+ */
+event_dd.prototype.get_sales_click_by_number = function ( _number, callback) {
+  winston.info('event_dd:get_sales_click_by_number : %s', _number);
+  event_m.find({type: "salesroom-number-" + _number},  null, null, function( err, xs){
+    if(err){
+      winston.error('Failed to fetch metrics items : %s', err);
+      callback( err, null);
+    }
+    winston.info('Found %s item(s)', xs.length);
+    callback(null, xs);
+  });
+}
 
 /** 
  * fetches all the event according to the given type which occured on the given element
