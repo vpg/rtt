@@ -23,6 +23,8 @@ module.exports= function( app){
     function render( res, err, x){
         // xxx list all allowed doms
         res.setHeader('Access-Control-Allow-Origin',  "*");
+        res.setHeader('Access-Control-Allow-Credentials',  true);
+        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
         if(err) handle_err(err, res);
         if( ! x.event_xs.length) res.send(404);
         else res.json(x);
