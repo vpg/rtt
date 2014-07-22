@@ -1,5 +1,6 @@
 #rtt
-Off-site RaealTimeTracker project
+Off-site RealTimeTracker project
+Based on NodeJS (+SOcket.io) and MongoDB
 
 ### How to USE (client side)
 #### Fetching events w/ RTT REST API
@@ -80,9 +81,3 @@ Run server
  * Fournir une API de tracking 
  * Mise en place de métriques sans effort
  * Récupération de métriques
-
-###Archi Technique
- * NodeJS
- * MongoDB
- * Symfony 2
- * BootstrapCSS http://getbootstrap.com/
