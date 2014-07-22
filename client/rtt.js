@@ -66,8 +66,8 @@ Rtt.prototype.view= function (){
  * Use case : a new visitor leaves the current page
  */
 Rtt.prototype.leave= function (){
-    var event_x = this.build_event_x( 'visit:in', this.build_view_code(), -1);
-    this.socket.emit('track:out', event_x);
+    var event_x = this.build_event_x( 'visit:out', this.build_view_code(), 1);
+    this.socket.emit('track:in', event_x);
 }
 
 Rtt.prototype.click= function ( _dom_element_id){
