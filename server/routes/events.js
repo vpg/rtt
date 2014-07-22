@@ -21,6 +21,8 @@ module.exports= function( app){
         }
     }
     function render( res, err, x){
+        // xxx list all allowed doms
+        res.setHeader('Access-Control-Allow-Origin',  "*");
         if(err) handle_err(err, res);
         if( ! x.event_xs.length) res.send(404);
         else res.json(x);
@@ -41,7 +43,6 @@ module.exports= function( app){
         event_d.get_by_type_n_element_n_period( req.params.type_code, req.params.element_id, req.params.from, req.params.to, render.bind(this, res));
     }
     function get_sales_click_by_number( req, res){
-      res.setHeader('Access-Control-Allow-Origin',  "*");
       event_d.get_sales_click_by_number( req.params.number, render.bind(this, res));
     }
 }

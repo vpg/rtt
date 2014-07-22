@@ -8,7 +8,8 @@
         "mongoose":    "latest",
         "winston":     "latest",
         "socket.io":   "latest",
-        "uas-parser":  "latest"
+        "uas-parser":  "latest",
+        "node.extend": "latest"
     },
     "devdependencies": {
         "mocha": "latest"

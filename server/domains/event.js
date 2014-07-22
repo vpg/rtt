@@ -2,7 +2,8 @@
  * Domain Driven class
  */
 var winston=    require('winston');
-var _UASParser=  require('uas-parser');
+var UASParser=  require('uas-parser');
+var extend = require('node.extend');
 require('../dbals/mongoose');
 var event_m = require('../models/event');
 
@@ -16,7 +17,7 @@ var event_dd = function(){
 event_dd.prototype.register = function ( _type, _element_x, _client_x, _value, callback){
     winston.info('register event  %s : %s', _type, _client_x.user_agent_x.raw);
     /// xxx Check params
-    var ua_x = _UASParser.parse( _client_x.user_agent_x.raw);
+    var ua_x = UASParser.parse( _client_x.user_agent_x.raw);
     console.log( ua_x);
     var event_x = {
         type:      _type,
@@ -65,13 +66,23 @@ event_dd.prototype.get_sales_click_by_number = function ( _number, callback) {
 */
 event_dd.prototype.get_by_type_n_element = function ( _type_code, _element_id, callback){
     winston.info('event_dd:get_by_type_n_element %s : %s', _type_code, _element_id);
-    event_m.find({type:_type_code, 'element_x.id':_element_id}, null, null, function( err, xs){
+    var query = {type:_type_code};
+    /// Defines if element_id is either an id (MD5) or a code
+    /// xxx to factorize
+    if( _element_id.match(/[0-9a-f]{32}/i)){
+        extend( query, { 'element_x.id':_element_id});
+    }
+    else{
+        extend( query, { 'element_x.code':_element_id});
+    }
+    event_m.find( query, null, null, function( err, xs){
         if(err){
             winston.error('Failed to fetch metrics items : %s', err);
             callback( err, null);
         }
         winston.info('Found %s item(s)', xs.length);
-        callback(null, xs);
+        var response = { events_total_nb : xs.length, event_xs : xs};
+        callback(null, response);
     });
 }
 
@@ -84,7 +95,16 @@ event_dd.prototype.get_by_type_n_element_from = function ( _type_code, _element_
     var from_locale_dt = new Date(Date.parse(_from_dt));
     // xxx must improve this timezone hack
     var from_utc_dt =  new Date(from_locale_dt.getTime() + ( -120 * 60000));
-    event_m.find({type:_type_code, 'element_x.id':_element_id, occured_on: { "$gte": from_utc_dt}}, null, null, function( err, xs){
+    var query = {type:_type_code, occured_on: { "$gte": from_utc_dt}};
+    /// Defines if element_id is either an id (MD5) or a code
+    /// xxx to factorize
+    if( _element_id.match(/[0-9a-f]{32}/i)){
+        extend( query, { 'element_x.id':_element_id});
+    }
+    else{
+        extend( query, { 'element_x.code':_element_id});
+    }
+    event_m.find( query, null, null, function( err, xs){
         if(err){
             winston.error('Failed to fetch metrics items : %s', err);
             callback( err, null);
@@ -102,7 +122,16 @@ event_dd.prototype.get_by_type_n_element_n_period = function ( _type_code, _elem
     // xxx must improve this timezone hack
     var from_utc_dt =  new Date(from_locale_dt.getTime() + ( -120 * 60000));
     var to_utc_dt =  new Date(to_locale_dt.getTime() + ( -120 * 60000));
-    event_m.find({type:_type_code, 'element_x.id':_element_id, occured_on: { "$gte": from_utc_dt, "$lte":to_utc_dt}}, null, null, function( err, xs){
+    var query = {type:_type_code, occured_on: { "$gte": from_utc_dt, "$lte":to_utc_dt}};
+    /// Defines if element_id is either an id (MD5) or a code
+    /// xxx to factorize
+    if( _element_id.match(/[0-9a-f]{32}/i)){
+        extend( query, { 'element_x.id':_element_id});
+    }
+    else{
+        extend( query, { 'element_x.code':_element_id});
+    }
+    event_m.find( query, null, null, function( err, xs){
         if(err){
             winston.error('Failed to fetch metrics items : %s', err);
             callback( err, null);
@@ -112,5 +141,4 @@ event_dd.prototype.get_by_type_n_element_n_period = function ( _type_code, _elem
         callback(null, response);
     });
 }
-
 module.exports = event_dd;

@@ -35,6 +35,11 @@
                 $('#view_count').html(view_count);
                 console.log('Monit %s', event_x.value);
             });
+
+            $("button.btn").on('click', function () {
+                var saleId = $(this).attr('id'); // 
+                rtt.event("click", "saleroom:sale:" + saleId);
+            });
         });
     </script>
   </head>
@@ -62,13 +67,13 @@
       <div class="row marketing">
         <div class="col-lg-6">
           <h4>Real</h4>
-          <p>Need womething <button type="button" class="btn btn-primary">Real</button> ?</p>
+          <p>Need womething <button id="1" type="button" class="btn btn-primary">Real</button> ?</p>
           <h4>Tracker</h4>
-          <p><button type="button" class="btn btn-danger">Track</button> me, i'm famous !</p>
+          <p><button id="2" type="button" class="btn btn-danger">Track</button> me, i'm famous !</p>
         </div>
         <div class="col-lg-6">
           <h4>Time</h4>
-          <p>Click here to get more <button type="button" class="btn btn-info">Time</button></p>
+          <p>Click here to get more <button id="3" type="button" class="btn btn-info">Time</button></p>
 
         </div>
       </div>
