@@ -56,7 +56,8 @@ event_dd.prototype.get_sales_click_by_number = function ( _number, callback) {
       callback( err, null);
     }
     winston.info('Found %s item(s)', xs.length);
-    callback(null, xs);
+    var response = { events_total_nb : xs.length, event_xs : xs};
+    callback(null, response);
   });
 }
 
