@@ -10,6 +10,7 @@ module.exports= function( app){
     app.get( '/events/type/:type_code/element/:element_id', get_events_by_type_n_element);
     app.get( '/events/type/:type_code/element/:element_id/from/:from', get_events_by_type_n_element_from);
     app.get( '/events/type/:type_code/element/:element_id/from/:from/to/:to', get_events_by_type_n_element_n_period);
+
     app.get( '/events/type/salesroom/number/:number', get_sales_click_by_number);
     app.get( '*', home);
 
@@ -35,13 +36,31 @@ module.exports= function( app){
         res.end("RTT - RealTimeTracker\nv0.1");
     }
     function get_events_by_type_n_element( req, res){
-        event_d.get_by_type_n_element( req.params.type_code, req.params.element_id, render.bind(this, res));
+        /// deal w/ group by
+        if( typeof req.query.g != 'undefined'){
+            event_d.group_by_type_n_element( req.params.type_code, req.params.element_id, req.query.g,  render.bind(this, res));
+        }
+        else{
+            event_d.get_by_type_n_element( req.params.type_code, req.params.element_id, render.bind(this, res));
+        }
     }
     function get_events_by_type_n_element_from( req, res){
-        event_d.get_by_type_n_element_from( req.params.type_code, req.params.element_id, req.params.from, render.bind(this, res));
+        /// deal w/ group by
+        if( typeof req.query.g != 'undefined'){
+            event_d.group_by_type_n_element_from( req.params.type_code, req.params.element_id, req.params.from, req.query.g, render.bind(this, res));
+        }
+        else{
+            event_d.get_by_type_n_element_from( req.params.type_code, req.params.element_id, req.params.from, render.bind(this, res));
+        }
     }
     function get_events_by_type_n_element_n_period( req, res){
-        event_d.get_by_type_n_element_n_period( req.params.type_code, req.params.element_id, req.params.from, req.params.to, render.bind(this, res));
+        /// deal w/ group by
+        if( typeof req.query.g != 'undefined'){
+            event_d.group_by_type_n_element_n_period( req.params.type_code, req.params.element_id, req.params.from, req.params.to, req.query.g, render.bind(this, res));
+        }
+        else{
+            event_d.get_by_type_n_element_n_period( req.params.type_code, req.params.element_id, req.params.from, req.params.to, render.bind(this, res));
+        }
     }
     function get_sales_click_by_number( req, res){
       event_d.get_sales_click_by_number( req.params.number, render.bind(this, res));
