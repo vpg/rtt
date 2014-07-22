@@ -21,6 +21,9 @@ module.exports= function( app){
         }
     }
     function render( res, err, x){
+        // xxx list all allowed doms
+        res.setHeader('Access-Control-Allow-Origin',  "*");
+        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
         if(err) handle_err(err, res);
         if( ! x.event_xs.length) res.send(404);
         else res.json(x);
@@ -32,31 +35,15 @@ module.exports= function( app){
         res.end("RTT - RealTimeTracker\nv0.1");
     }
     function get_events_by_type_n_element( req, res){
-        // xxx list all allowed doms
-        res.setHeader('Access-Control-Allow-Origin',  "*");
-        res.setHeader('Access-Control-Allow-Credentials',  true);
-        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
         event_d.get_by_type_n_element( req.params.type_code, req.params.element_id, render.bind(this, res));
     }
     function get_events_by_type_n_element_from( req, res){
-        // xxx list all allowed doms
-        res.setHeader('Access-Control-Allow-Origin',  "*");
-        res.setHeader('Access-Control-Allow-Credentials',  true);
-        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
         event_d.get_by_type_n_element_from( req.params.type_code, req.params.element_id, req.params.from, render.bind(this, res));
     }
     function get_events_by_type_n_element_n_period( req, res){
-        // xxx list all allowed doms
-        res.setHeader('Access-Control-Allow-Origin',  "*");
-        res.setHeader('Access-Control-Allow-Credentials',  true);
-        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
         event_d.get_by_type_n_element_n_period( req.params.type_code, req.params.element_id, req.params.from, req.params.to, render.bind(this, res));
     }
     function get_sales_click_by_number( req, res){
-        // xxx list all allowed doms
-        res.setHeader('Access-Control-Allow-Origin',  "*");
-        res.setHeader('Access-Control-Allow-Credentials',  true);
-        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-        event_d.get_sales_click_by_number( req.params.number, render.bind(this, res));
+      event_d.get_sales_click_by_number( req.params.number, render.bind(this, res));
     }
 }
