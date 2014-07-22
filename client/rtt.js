@@ -75,8 +75,9 @@ Rtt.prototype.click= function ( _dom_element_id){
     this.socket.emit('track:in', event_x);
 }
 
-Rtt.prototype.event = function (_event_type, _element_id) {
-  var event_x = this.build_event_x( _event_type,  _element_id, 1);
+Rtt.prototype.event = function (_event_type, _element_id, _value) {
+  var value = typeof _value !== 'undefined' ? _value : 1;
+  var event_x = this.build_event_x( _event_type,  _element_id, value);
   this.socket.emit('track:in', event_x);
 }
 
