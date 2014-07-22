@@ -1,7 +1,20 @@
 #rtt
-Off-site RaealTimeTracker project
+Off-site RealTimeTracker project
+Based on NodeJS (+SOcket.io) and MongoDB
 
 ### How to USE (client side)
+#### Fetching events w/ RTT REST API
+##### Routes
+	/events/type/:type_code/element/:element_id 
+	/events/type/:type_code/element/:element_id/from/:from
+	/events/type/:type_code/element/:element_id/from/:from/to/:to
+##### Ex.
+Fetching events type ```visit:in``` for the element ```a823e22266698c2ed2a52ed4039ed361```
+	http://127.0.0.1:8086/events/type/visit:in/element/a823e22266698c2ed2a52ed4039ed361
+Fetching events type ```click``` for the element ```f124e12356798c2ed2a52ed4039DA987``` since the ```2014-07-21 12:00:00```
+	http://127.0.0.1:8086/events/type/click/element/f124e12356798c2ed2a52ed4039DA987/from/2014-07-21%2012:00:00
+ 
+#### Send events
 Get socket.io from rtt server
 
 	<script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
@@ -68,9 +81,3 @@ Run server
  * Fournir une API de tracking 
  * Mise en place de métriques sans effort
  * Récupération de métriques
-
-###Archi Technique
- * NodeJS
- * MongoDB
- * Symfony 2
- * BootstrapCSS http://getbootstrap.com/
