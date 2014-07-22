@@ -19,10 +19,10 @@ module.exports= function( app){
             res.send(500, err);
         }
     }
-    function render( res, err, todo_xs){
+    function render( res, err, x){
         if(err) handle_err(err, res);
-        if( ! todo_xs.length) res.send(404);
-        else res.json(todo_xs);
+        if( ! x.event_xs.length) res.send(404);
+        else res.json(x);
     }
 
     /// Routes callbacks

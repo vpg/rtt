@@ -76,7 +76,8 @@ event_dd.prototype.get_by_type_n_element_from = function ( _type_code, _element_
             callback( err, null);
         }
         winston.info('Found %s item(s)', xs.length);
-        callback(null, xs);
+        var response = { events_total_nb : xs.length, event_xs : xs};
+        callback(null, response);
     });
 }
 
@@ -93,7 +94,8 @@ event_dd.prototype.get_by_type_n_element_n_period = function ( _type_code, _elem
             callback( err, null);
         }
         winston.info('Found %s item(s)', xs.length);
-        callback(null, xs);
+        var response = { events_total_nb : xs.length, event_xs : xs};
+        callback(null, response);
     });
 }
 
