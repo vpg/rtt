@@ -22,10 +22,6 @@ Rtt.prototype.build_click_code= function( _dom_element_id){
  return this.build_view_code() + ':' + _dom_element_id;
 }
 
-Rtt.prototype.build_event_code= function( _event_type, _element_id){
-  return _event_type + '::' + _element_id;
-}
-
 Rtt.prototype.build_event_x= function( _type, _code, _value){
     var event_x = { 
         type: _type,
@@ -80,7 +76,7 @@ Rtt.prototype.click= function ( _dom_element_id){
 }
 
 Rtt.prototype.event = function (_event_type, _element_id) {
-  var event_x = this.build_event_x( _event_type, this.build_event_code(_event_type, _element_id), 1);
+  var event_x = this.build_event_x( _event_type,  _element_id, 1);
   this.socket.emit('track:in', event_x);
 }
 
