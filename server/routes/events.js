@@ -12,6 +12,7 @@ module.exports= function( app){
     app.get( '/events/type/:type_code/element/:element_id/from/:from/to/:to', get_events_by_type_n_element_n_period);
 
     app.get( '/events/type/salesroom/number/:number', get_sales_click_by_number);
+    app.get( '/heatmap/:x/:y', get_heatmap_by_position);
     app.get( '*', home);
 
     /// Render callbaks
@@ -34,6 +35,10 @@ module.exports= function( app){
     function home(req, res){
         res.setHeader('Content-Type', 'text/plain');
         res.end("RTT - RealTimeTracker\nv0.1");
+    }
+    function get_heatmap_by_position(req, res){
+      res.setHeader('Access-Control-Allow-Origin',  "*");
+      event_d.get_heatmap_by_position( req.params.x, req.params.y, render.bind(this, res));
     }
     function get_events_by_type_n_element( req, res){
         /// deal w/ group by

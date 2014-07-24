@@ -45,6 +45,22 @@ event_dd.prototype.register = function ( _type, _element_x, _client_x, _value, c
     callback(e, null);
 }
 
+
+/**
+ * fetches all heatmap clicks
+ */
+event_dd.prototype.get_heatmap_by_position = function ( _x, _y,  callback) {
+  winston.info('event_dd:get_heatmap_by_position : %s / %s', _x, _y);
+  event_m.find({type: "heatmap-" + _x + '/' + _y},  null, null, function( err, xs){
+    if(err){
+      winston.error('Failed to fetch metrics items : %s', err);
+      callback( err, null);
+    }
+    winston.info('Found %s item(s)', xs.length);
+    callback(null, xs);
+  });
+}
+
 /**
  * fetches all the click events in the salesroom according to the given sale number
  */
