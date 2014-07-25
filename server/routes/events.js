@@ -41,6 +41,10 @@ module.exports= function( app){
       event_d.get_heatmap_by_position( req.params.x, req.params.y, render.bind(this, res));
     }
     function get_events_by_type_n_element( req, res){
+      res.setHeader('Access-Control-Allow-Origin',  "*");
+      res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+
+
         /// deal w/ group by
         if( typeof req.query.g != 'undefined'){
             event_d.group_by_type_n_element( req.params.type_code, req.params.element_id, req.query.g,  render.bind(this, res));
