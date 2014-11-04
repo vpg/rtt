@@ -1,3 +1,0 @@
-rtt_query_homepage:
-    path:     /rttQuery/{name}
-    defaults: { _controller: RttQueryBundle:Default:index }

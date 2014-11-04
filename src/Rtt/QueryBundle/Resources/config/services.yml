@@ -1,7 +1,0 @@
-parameters:
-#    rtt_query.example.class: Rtt\QueryBundle\Example
-
-services:
-#    rtt_query.example:
-#        class: %rtt_query.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
