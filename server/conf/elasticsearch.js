@@ -7,10 +7,6 @@ var confx = {
 		port: 9200
     },
     recette: {
-		host: '192.168.20.21',
-		port: 9200
-    },
-    prod: {
 		host: 'rttesearch.recette.vpg.lan',
 		port: 9200
     }
