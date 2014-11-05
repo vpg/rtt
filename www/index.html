@@ -14,8 +14,8 @@
     <link href="jumbotron-narrow.css" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="http://192.168.20.20:8086/socket.io/socket.io.js"></script>        
-    <script src="/demo/rtt.js"></script>        
+    <script src="http://192.168.100.100:8086/socket.io/socket.io.js"></script>        
+    <script src="rtt.js"></script>        
     <script type="text/javascript">
         $( document ).ready(function() {
             // Tracking page view
@@ -26,7 +26,6 @@
             }
             // Tracking clicks
             $('#get_rtt_btn').bind('click', function (){
-                alert( 'd');
                 rtt.click( $(this).attr('id'));
             });
             // monitor view
@@ -50,7 +49,7 @@
                             });
                 });
             }
-            setInterval(refresh_metrics,1000);
+            //setInterval(refresh_metrics,1000);
             
 
         });

@@ -1,18 +1,17 @@
 {
     "name": "RTT",
     "description": "RealTime Tracking",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "dependencies": {
-        "express":     "latest",
-        "body-parser": "latest",
-        "mongoose":    "latest",
-        "winston":     "latest",
-        "socket.io":   "latest",
-        "uas-parser":  "latest",
-        "node.extend": "latest"
+        "express":       "latest",
+        "elasticsearch": "latest",
+        "body-parser":   "latest",
+        "winston":       "latest",
+        "socket.io":     "latest",
+        "uas-parser":    "latest",
+        "node.extend":   "latest"
     },
-    "devdependencies": {
+    "devDependencies": {
         "mocha": "latest"
-    },
-    "author": "JB jeromebourgeais.pro@gmail.com"
+    }
 }

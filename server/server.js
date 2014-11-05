@@ -4,15 +4,20 @@ var _express=    require('express');
 var _bodyParser= require('body-parser');
 
 /// RTT
-var event_dd= require( './domains/event');
+var event_dd= require( './domains/tracking');
 var evt_dd= new event_dd();
 
 // Utils
 var l= require('./logger');
 /// App
 var app = _express();
-app.use(_express.static(__dirname + '/www'));
+app.use(_express.static(__dirname + '/../www/'));
 app.use(_bodyParser());
+
+app.get('/', function(req,res) {
+    console.log('One more connection');
+  res.sendfile('../www/index.html');
+});
 
 require('./routes/events')(app);
 

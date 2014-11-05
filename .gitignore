@@ -1,20 +1,8 @@
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-
+*.swp
+*.swo
 # Vagrant
 .vagrant
-
 # NodeJS
 server/logs
 server/node_modules
 
-# Symfony
-bin/
-web/bundles/
-web/uploads/
-var/
-vendor/
-UPGRADE*
-phpunit.xml.dist
-LICENSE
-composer.lock
