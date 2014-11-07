@@ -19,8 +19,6 @@ app.get('/', function(req,res) {
   res.sendfile('../www/index.html');
 });
 
-require('./routes/events')(app);
-
 var server= _http.createServer(app);
 var io=   require('socket.io')(server);
 
@@ -39,14 +37,6 @@ io.on('connection', function (socket) {
         console.log('track:out from %s ', x.element_x.code );
         io.sockets.emit('out:'+x.element_x.code, x);
     });
-    //socket.on('rtt_ping', function ( _x){
-    //   console.log('Fowarding ping from %s', _x.element_x.code);
-    //   socket.broadcast.emit('rtt_ping:'+_x.element_x.code,  { element_x : { code : _x.element_x.code}, value : 1});
-    //});
-    //socket.on('rtt_pong', function ( _x){
-    //   console.log('Forwarding pong from %s', _x.element_x.code);
-    //   socket.emit('rtt_pong:'+_x.element_x.code,  { element_x : { code : _x.element_x.code}, value : 1});
-    //});
     socket.on('disconnect', function () {
         l.log("Socket disconnected");
     });
