@@ -24,6 +24,7 @@ tracking_dd.prototype.register = function ( _type, _element_x, _client_x, _value
         index: 'rtt',
         type: _type,
         body: {
+            occured_on: new Date().toISOString(),
             element_x: _element_x,
             client_x:  {
                 id: _client_x.id,
